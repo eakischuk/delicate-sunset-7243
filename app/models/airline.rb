@@ -4,6 +4,8 @@ class Airline < ApplicationRecord
 
   def adult_passengers
     passengers.where('passengers.age >= ?', 18)
-    .distinct
+    .select('passengers.*, COUNT(passengers.*) AS flight_count')
+    .group('passengers.id')
+    .order('flight_count DESC')
   end
 end

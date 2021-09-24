@@ -14,7 +14,8 @@ RSpec.describe 'airline show page', type: :feature do
 
     @flight_1 = Flight.create!(number: 1, date: '08/03/21', departure_city: 'Denver', arrival_city: 'Portland', airline: @fronteir)
     @flight_2 = Flight.create!(number: 2, date: '08/15/21', departure_city: 'Indianapolis', arrival_city: 'San Francisco', airline: @fronteir)
-    @flight_3 = Flight.create!(number: 3, date: '08/01/21', departure_city: 'Indianapolis', arrival_city: 'Denver', airline: @southwest)
+    @flight_3 = Flight.create!(number: 3, date: '08/22/21', departure_city: 'Washington D.C.', arrival_city: 'San Francisco', airline: @fronteir)
+    @flight_4 = Flight.create!(number: 4, date: '08/01/21', departure_city: 'Indianapolis', arrival_city: 'Denver', airline: @southwest)
 
     @flight_1.passengers << @steve
     @flight_1.passengers << @ally
@@ -23,12 +24,17 @@ RSpec.describe 'airline show page', type: :feature do
     @flight_2.passengers << @albert
     @flight_2.passengers << @steve
 
-    @flight_3.passengers << @james
+    @flight_3.passengers << @albert
+    @flight_3.passengers << @steve
+
+    @flight_4.passengers << @james
   end
 
   describe 'display' do
-    it 'lists all adult passengers only once' do
+    before(:each) do
       visit airline_path(@fronteir.id)
+    end
+    it 'lists all adult passengers only once' do
 
       expect(page).to have_content("Fronteir")
       within('#passengers') do
@@ -37,6 +43,13 @@ RSpec.describe 'airline show page', type: :feature do
         expect(page).to have_content(@albert.name)
         expect(page).to_not have_content(@ally.name) #under 18 does not show up
         expect(page).to_not have_content(@james.name) #no other airlines passengers
+      end
+    end
+
+    it 'orders passengers by frequent fliers' do
+      within('#passengers') do
+        expect(@steve.name).to appear_before(@albert.name)
+        expect(@albert.name).to appear_before(@meg.name)
       end
     end
   end

@@ -36,7 +36,7 @@ RSpec.describe Airline do
   end
 
   describe 'instance methods' do
-    it 'has distinct adult passengers' do
+    it 'has distinct adult passengers ordered by flight freq' do
       expect(@fronteir.adult_passengers).to eq([@steve, @albert, @meg])
     end
   end

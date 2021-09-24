@@ -36,6 +36,7 @@ RSpec.describe 'airline show page', type: :feature do
         expect(page).to have_content(@meg.name) #18 shows up
         expect(page).to have_content(@albert.name)
         expect(page).to_not have_content(@ally.name) #under 18 does not show up
+        expect(page).to_not have_content(@james.name) #no other airlines passengers
       end
     end
   end

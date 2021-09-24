@@ -48,8 +48,26 @@ RSpec.describe 'flights index page', type: :feature do
       within("##{@flight_1.id}-passengers-#{@steve.id}") do
         expect(page).to have_link("Remove #{@steve.name}")
       end
+      within("##{@flight_1.id}-passengers-#{@ally.id}") do
+        expect(page).to have_link("Remove #{@ally.name}")
+      end
+      within("##{@flight_1.id}-passengers-#{@meg.id}") do
+        expect(page).to have_link("Remove #{@meg.name}")
+      end
+      within("##{@flight_2.id}-passengers-#{@albert.id}") do
+        expect(page).to have_link("Remove #{@albert.name}")
+      end
       within("##{@flight_2.id}-passengers-#{@steve.id}") do
         expect(page).to have_link("Remove #{@steve.name}")
+        click_on "Remove #{@steve.name}"
+      end
+
+      expect(current_path).to eq(flights_path)
+      within("#flights-#{@flight_2.id}") do
+        expect(page).to_not have_content(@steve.name)
+      end
+      within("#flights-#{@flight_1.id}") do
+        expect(page).to have_content(@steve.name)
       end
     end
   end

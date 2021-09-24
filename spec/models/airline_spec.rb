@@ -14,7 +14,8 @@ RSpec.describe Airline do
 
     @flight_1 = Flight.create!(number: 1, date: '08/03/21', departure_city: 'Denver', arrival_city: 'Portland', airline: @fronteir)
     @flight_2 = Flight.create!(number: 2, date: '08/15/21', departure_city: 'Indianapolis', arrival_city: 'San Francisco', airline: @fronteir)
-    @flight_3 = Flight.create!(number: 3, date: '08/01/21', departure_city: 'Indianapolis', arrival_city: 'Denver', airline: @southwest)
+    @flight_3 = Flight.create!(number: 3, date: '08/22/21', departure_city: 'Washington D.C.', arrival_city: 'San Francisco', airline: @fronteir)
+    @flight_4 = Flight.create!(number: 4, date: '08/01/21', departure_city: 'Indianapolis', arrival_city: 'Denver', airline: @southwest)
 
     @flight_1.passengers << @steve
     @flight_1.passengers << @ally
@@ -23,7 +24,10 @@ RSpec.describe Airline do
     @flight_2.passengers << @albert
     @flight_2.passengers << @steve
 
-    @flight_3.passengers << @james
+    @flight_3.passengers << @albert
+    @flight_3.passengers << @steve
+
+    @flight_4.passengers << @james
   end
 
   describe 'relationships' do
@@ -33,7 +37,7 @@ RSpec.describe Airline do
 
   describe 'instance methods' do
     it 'has distinct adult passengers' do
-      expect(@fronteir.adult_passengers).to eq([@steve, @meg, @albert])
+      expect(@fronteir.adult_passengers).to eq([@steve, @albert, @meg])
     end
   end
 end

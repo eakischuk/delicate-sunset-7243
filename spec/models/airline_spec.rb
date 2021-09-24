@@ -6,7 +6,7 @@ RSpec.describe Airline do
     @southwest = Airline.create!(name: 'Southwest')
 
     @steve = Passenger.create!(name: 'Steve', age: 52)
-    @meg = Passenger.create!(name: 'Meg', age: 34)
+    @meg = Passenger.create!(name: 'Meg', age: 18)
     @albert = Passenger.create!(name: 'Albert', age: 79)
     @ally = Passenger.create!(name: 'Ally', age: 13)
 

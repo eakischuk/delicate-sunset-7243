@@ -3,7 +3,7 @@
     <li id='flights-<%= flight.id %>'><%= flight.number %> - <%= flight.airline.name %><br>
       <ul>
       <% flight.passengers.each do |passenger| %>
-        <li id='passengers-<%= passenger.id %>'><%= passenger.name %></li>
+        <li id='<%= flight.id %>-passengers-<%= passenger.id %>'><%= passenger.name %> - <%= link_to "Remove #{passenger.name}", flight_passenger_path(flight.flight_passenger(passenger.id)), method: :delete %></li>
       <% end %>
     </ul>
     </li>

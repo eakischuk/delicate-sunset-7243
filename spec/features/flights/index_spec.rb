@@ -44,6 +44,13 @@ RSpec.describe 'flights index page', type: :feature do
   describe 'links' do
     it 'has passenger removal links' do
       visit flights_path
+
+      within("##{@flight_1.id}-passengers-#{@steve.id}") do
+        expect(page).to have_link("Remove #{@steve.name}")
+      end
+      within("##{@flight_2.id}-passengers-#{@steve.id}") do
+        expect(page).to have_link("Remove #{@steve.name}")
+      end
     end
   end
 end
